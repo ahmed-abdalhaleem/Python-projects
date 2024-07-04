@@ -1,0 +1,22 @@
+Software development life cycle:
+
+    1- Business Knowledge/logic:
+	This project is a weather forecast that take a location and return the weather information.
+
+    2- Requirement Analysis:
+	api key from 
+
+    3- Planing:
+	using miro.com
+
+    4- Excution/Implementation:
+	python3
+	requests
+	tkinter
+
+    5- Testing & Debugging:
+	using vscode.
+
+    6- Continuous Improvement:
+	using gemini.
+
