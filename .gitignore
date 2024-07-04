@@ -1,0 +1,5 @@
+# Ignore all logs files.
+*.log
+
+# Ignore all .md files
+*.md
