@@ -1,1 +1,78 @@
+Work flow:
+===========================================
+===========================================
+
+update window after any operation:
+    clean preview section 
+    clean task un-completed frame 
+    clean task completed frame 
+    fill un-completed frame 
+    fill completed frame 
+
+
+===========================================
+===========================================
+
+Implement GUI 
+
+fill with task:
+    fill( un-completed ) tasks frame 
+    fill( completed ) tasks frame 
+
+
+listen to events:
+
+    ## main container events
+
+    preview selected task:
+        change content of preview section 
+
+
+    finish task:
+        change task status to True 
+        change task position to the beginning of the tasks list 
+        update window after operation 
+        
+
+    edit task:
+        hide all sections 
+        show entry section 
+        send the task info to entry section 
+
+
+    delete task:
+        delete the task 
+        update window after operation 
+
+
+    restore task:
+        change task status to False 
+        change task position to the beginning of the tasks list 
+        update window after operation 
+
+
+    add new task:
+        hide all sections 
+        show add section 
+
+
+    ## add new task section events
+
+    reset:
+        clean widgets of the add section 
+
+
+    cancel:
+        clean widgets of the add section 
+        show all sections 
+        hide add section 
+
+
+    submit:
+        make a task 
+        add the task to the beginning of the list 
+        show all sections 
+        hide add section 
+        update window after operation 
+
 
