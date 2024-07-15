@@ -87,7 +87,7 @@ def select_task_to(operation, index):
 
     current_operation = operation
 
-    # redirect the excution flow
+    # redirect the execution flow
 
     if operation == "delete":
         delete_task(index)
