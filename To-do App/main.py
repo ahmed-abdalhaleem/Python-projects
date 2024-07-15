@@ -44,11 +44,11 @@ def filter_by_status(status):
 
 def fill_frame(frame_to_fill, list_of_tasks_to_be_filled):
     """
-    frame_to_fill-----------: could be tasks_container_uncompleted_frm, tasks_container_completed_frm
+    frame_to_fill----------------: could be tasks_container_uncompleted_frm, tasks_container_completed_frm
     list_of_tasks_to_be_filled---: could be uncompleted tasks, completed tasks based on frame
-    dict_of_controllers-----: the controllers of task 
-        uncompleted---: {'finish': complete_task, 'delete': delete_task, 'edit': edit_task}
-        completed-----: {'restore': complete_task, 'delete': delete_task}
+    list_of_controllers----------: the controllers of task 
+        uncompleted---: ["delete", "edit", "finish"]
+        completed-----: ["delete", "restore"]
     """
 
     global tasks_list
