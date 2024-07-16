@@ -46,33 +46,44 @@ def fill_frame(frame_to_fill, list_of_tasks_to_be_filled):
     """
     frame_to_fill----------------: could be tasks_container_uncompleted_frm, tasks_container_completed_frm
     list_of_tasks_to_be_filled---: could be uncompleted tasks, completed tasks based on frame
-    list_of_controllers----------: the controllers of task 
-        uncompleted---: ["delete", "edit", "finish"]
-        completed-----: ["delete", "restore"]
+
+    this method fill the frames by its suitable elements
+    
+    the operations of a task are the actions that handle the task [delete, finish, edit, restore]
     """
 
     global tasks_list
 
-    if frame_to_fill == tasks_container_completed_frm:
-        list_of_operations = ["delete", "restore"]
+    # specify the suitable operations and its color based on being filled frame
+    if frame_to_fill == tasks_container_uncompleted_frm:
+        dict_of_operation_and_colors = {"delete": "red", "edit": "orange", "finish": "green"}
     else: 
-        list_of_operations = ["delete", "edit", "finish"]
+        dict_of_operation_and_colors = {"delete": "red", "restore": "green"} 
 
+    # set the back ground color of the task
+    task_color = "lightblue" if frame_to_fill == tasks_container_uncompleted_frm else "lightgray"
+
+    # list that contains the frames in which the task elements [task title, operations] will be created.
     sub_frames_list = []
 
+    # loop on the tasks and create a frame for each task.
     for task in list_of_tasks_to_be_filled:
         
-        sub_frames_list.append(tk.Frame(master=frame_to_fill))
+        sub_frames_list.append(tk.Frame(master=frame_to_fill, bg=task_color, border=1, relief='solid'))
 
         index_in_frm = list_of_tasks_to_be_filled.index(task)
         
-        sub_frames_list[index_in_frm].pack(fill='x', expand=True)
+        sub_frames_list[index_in_frm].pack(fill='x', expand=True, pady=2)
 
-        tk.Button(master=sub_frames_list[index_in_frm], text=task['title'], anchor='w',
+        # create the task title button which preview the task if it's clicked
+        tk.Button(master=sub_frames_list[index_in_frm], text=task['title'], anchor='w', relief="flat",
         command=partial(preview_task, tasks_list.index(task))).pack(side='left', fill='both', expand=True)
 
-        for operation in list_of_operations:
-            tk.Button(master=sub_frames_list[index_in_frm], text=operation,
+
+        # in each frame create a button for each operation to handle
+        for operation, color in dict_of_operation_and_colors.items():
+            tk.Button(master=sub_frames_list[index_in_frm],
+            bg=color, fg="white", text=operation, relief="flat",
             command=partial(select_task_to, operation, tasks_list.index(task))
             ).pack(side='left', fill='both')
     return
@@ -346,13 +357,6 @@ def submit():
     update_window_after_operations()
 
     # message to the user
-    # if current_operation == "add":
-    #     new_task_title = new_task['title']
-    #     message_to_user_lbl.configure(text=f"New task: '{new_task_title}' has been added successfully!")
-    # elif current_operation == "edit" and old_task_title == new_task_title:
-    #     message_to_user_lbl.configure(text=f"Task: '{old_task_title}' has been edited successfully!")
-    # else:
-    #     message_to_user_lbl.configure(text=f"Task: '{old_task_title}' has been changed to:\n{new_task_title} successfully!")
     message_to_user_lbl.configure(
         text=f"Task is {current_operation}ed successfully!"
     )
@@ -572,6 +576,7 @@ tasks_container_completed_frm = tk.Frame(master=completed_tasks_frm)
 tasks_container_completed_frm.pack(fill='x', expand=True, padx=0, pady=0)
 
 
+# #############################################################################################
 
 # put tasks in them suitable places
 fill_frame(tasks_container_uncompleted_frm, filter_by_status(False))
